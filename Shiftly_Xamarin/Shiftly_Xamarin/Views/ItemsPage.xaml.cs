@@ -25,31 +25,49 @@ namespace Shiftly_Xamarin.Views
 			InitializeComponent();
 
 			BindingContext = viewModel = new ItemsViewModel();
+
+			RefreshGrid();
+
+			gridWrapper.SizeChanged += (sender, e) => RefreshGrid();
 		}
 
-		async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
+		void RefreshGrid()
 		{
-			var item = args.SelectedItem as Item;
-			if (item == null)
-				return;
-
-			await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(item)));
-
-			// Manually deselect item.
-			ItemsListView.SelectedItem = null;
+			if (gridWrapper.Height >= gridWrapper.Width)
+			{
+				gridLayout.WidthRequest = gridWrapper.Width - 40;
+				gridLayout.HeightRequest = gridLayout.Width;
+			}
+			else
+			{
+				gridLayout.HeightRequest = gridWrapper.Height - 40;
+				gridLayout.WidthRequest = gridLayout.Height;
+			}
 		}
 
-		async void AddItem_Clicked(object sender, EventArgs e)
-		{
-			await Navigation.PushModalAsync(new NavigationPage(new NewItemPage()));
-		}
+		//async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
+		//{
+		//	var item = args.SelectedItem as Item;
+		//	if (item == null)
+		//		return;
 
-		protected override void OnAppearing()
-		{
-			base.OnAppearing();
+		//	await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(item)));
 
-			if (viewModel.Items.Count == 0)
-				viewModel.LoadItemsCommand.Execute(null);
-		}
+		//	// Manually deselect item.
+		//	ItemsListView.SelectedItem = null;
+		//}
+
+		//async void AddItem_Clicked(object sender, EventArgs e)
+		//{
+		//	await Navigation.PushModalAsync(new NavigationPage(new NewItemPage()));
+		//}
+
+		//protected override void OnAppearing()
+		//{
+		//	base.OnAppearing();
+
+		//	if (viewModel.Items.Count == 0)
+		//		viewModel.LoadItemsCommand.Execute(null);
+		//}
 	}
 }

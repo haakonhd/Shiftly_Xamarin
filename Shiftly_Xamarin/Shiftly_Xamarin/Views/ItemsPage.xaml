@@ -8,49 +8,31 @@
              Title="{Binding Title}"
              x:Name="BrowseItemsPage">
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add" Clicked="AddItem_Clicked" />
-    </ContentPage.ToolbarItems>
+    <FlexLayout x:Name="pageLayout" Direction="Column" AlignItems="Center" >
+        <StackLayout Orientation="Vertical" Padding="10,20,10,20" BackgroundColor="#2a5f7c" FlexLayout.AlignSelf="Stretch">
+            <Label FontSize="35" TextColor="#eaeac0">Shiftly</Label>
+        </StackLayout>
+        <FlexLayout Direction="Column" FlexLayout.Grow="1" x:Name="gridWrapper" AlignItems="Center" JustifyContent="Center" >
+            <FlexLayout Direction="Column" x:Name="gridLayout" AlignItems="Center">
+                <FlexLayout x:Name="r1" Direction="Row" JustifyContent="Center" FlexLayout.Grow="1">
+                    <FlexLayout FlexLayout.Grow="1" BackgroundColor="#4295c2" Margin="10" Padding="10">
+                        <Label Text="Button 1" TextColor="#f6f6db"/>
+                    </FlexLayout>
+                    <FlexLayout FlexLayout.Grow="1" BackgroundColor="#4295c2" Margin="10" Padding="10">
+                        <Label Text="Button 2" TextColor="#f6f6db"/>
+                    </FlexLayout>
+                </FlexLayout>
 
-    <StackLayout>
-        <ListView x:Name="ItemsListView"
-                ItemsSource="{Binding Items}"
-                VerticalOptions="FillAndExpand"
-                HasUnevenRows="true"
-                RefreshCommand="{Binding LoadItemsCommand}"
-                IsPullToRefreshEnabled="true"
-                IsRefreshing="{Binding IsBusy, Mode=OneWay}"
-                CachingStrategy="RecycleElement"
-                ItemSelected="OnItemSelected">
-            <d:ListView.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>First Item</x:String>
-                    <x:String>Second Item</x:String>
-                    <x:String>Third Item</x:String>
-                    <x:String>Fourth Item</x:String>
-                    <x:String>Fifth Item</x:String>
-                    <x:String>Sixth Item</x:String>
-                </x:Array>
-            </d:ListView.ItemsSource>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout Padding="10">
-                            <Label Text="{Binding Text}" 
-                                d:Text="{Binding .}"
-                                LineBreakMode="NoWrap" 
-                                Style="{DynamicResource ListItemTextStyle}" 
-                                FontSize="16" />
-                            <Label Text="{Binding Description}" 
-                                d:Text="Item descripton"
-                                LineBreakMode="NoWrap"
-                                Style="{DynamicResource ListItemDetailTextStyle}"
-                                FontSize="13" />
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </StackLayout>
+                <FlexLayout  Direction="Row" JustifyContent="Center" FlexLayout.Grow="1">
+                    <FlexLayout FlexLayout.Grow="1" BackgroundColor="#4295c2" Margin="10" Padding="10">
+                        <Label Text="Button 3" TextColor="#f6f6db"/>
+                    </FlexLayout>
+                    <FlexLayout FlexLayout.Grow="1" BackgroundColor="#4295c2" Margin="10" Padding="10">
+                        <Label Text="Button 4" TextColor="#f6f6db"/>
+                    </FlexLayout>
+                </FlexLayout>
+            </FlexLayout>
+        </FlexLayout>
+    </FlexLayout>
     
 </ContentPage>
