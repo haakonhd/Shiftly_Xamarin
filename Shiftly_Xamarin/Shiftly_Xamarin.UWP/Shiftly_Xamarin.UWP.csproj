@@ -149,7 +149,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="4.2.0.709249" />
-    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.1.9"/>
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.1.9" />
     <PackageReference Include="Xamarin.Essentials" Version="1.2.0" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
@@ -158,6 +158,18 @@
       <Project>{99C79219-BEF8-4634-9463-16A9C9AEEDEE}</Project>
       <Name>Shiftly_Xamarin</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\pacifico.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\FontAwesome5Brands.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\FontAwesome5Regular.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\FontAwesome5Solid.otf" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

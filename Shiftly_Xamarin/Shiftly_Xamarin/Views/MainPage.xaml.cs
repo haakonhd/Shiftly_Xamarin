@@ -20,8 +20,13 @@ namespace Shiftly_Xamarin.Views
 			InitializeComponent();
 
 			MasterBehavior = MasterBehavior.Popover;
+			
+			MenuPages.Add((int)MenuItemType.Home, (NavigationPage)Detail);
 
-			MenuPages.Add((int)MenuItemType.Browse, (NavigationPage)Detail);
+			MessagingCenter.Subscribe<EventArgs>(this, "OpenMenu", args =>
+			{
+				IsPresented = !IsPresented;
+			});
 		}
 
 		public async Task NavigateFromMenu(int id)
@@ -30,7 +35,7 @@ namespace Shiftly_Xamarin.Views
 			{
 				switch (id)
 				{
-					case (int)MenuItemType.Browse:
+					case (int)MenuItemType.Home:
 						MenuPages.Add(id, new NavigationPage(new ItemsPage()));
 						break;
 					case (int)MenuItemType.About:

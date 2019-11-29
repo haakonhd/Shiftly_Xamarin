@@ -13,6 +13,30 @@ namespace Shiftly_Xamarin.Views
 		public AboutPage()
 		{
 			InitializeComponent();
+			NavigationPage.SetHasNavigationBar(this, false);
+		}
+
+		void ToggledMasterDetails(object sender, EventArgs e)
+		{
+			MessagingCenter.Send(EventArgs.Empty, "OpenMenu");
+		}
+
+		protected override void OnAppearing()
+		{
+			base.OnAppearing();
+			// Note: Only on UPW and WPF because of a bug.
+			if (Device.RuntimePlatform == Device.UWP || Device.RuntimePlatform == Device.WPF)
+			{
+				NavigationPage.SetHasNavigationBar(this, true);
+				NavigationPage.SetHasNavigationBar(this, false);
+				MasterDetailPage mainPage = App.Current.MainPage as MasterDetailPage;
+				if (mainPage != null)
+				{
+					mainPage.MasterBehavior = MasterBehavior.Default;
+					mainPage.MasterBehavior = MasterBehavior.Popover;
+					mainPage.IsPresented = false;
+				}
+			}
 		}
 	}
 }

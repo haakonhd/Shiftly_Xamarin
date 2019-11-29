@@ -23,25 +23,49 @@ namespace Shiftly_Xamarin.Views
 		public ItemsPage()
 		{
 			InitializeComponent();
+			NavigationPage.SetHasNavigationBar(this, false);
 
 			BindingContext = viewModel = new ItemsViewModel();
-
-			RefreshGrid();
 
 			gridWrapper.SizeChanged += (sender, e) => RefreshGrid();
 		}
 
+
 		void RefreshGrid()
 		{
+
 			if (gridWrapper.Height >= gridWrapper.Width)
 			{
 				gridLayout.WidthRequest = gridWrapper.Width - 40;
-				gridLayout.HeightRequest = gridLayout.Width;
+				gridLayout.HeightRequest = gridWrapper.Width -40;
 			}
 			else
 			{
 				gridLayout.HeightRequest = gridWrapper.Height - 40;
-				gridLayout.WidthRequest = gridLayout.Height;
+				gridLayout.WidthRequest = gridWrapper.Height - 40;
+			}
+		}
+		
+		void ToggledMasterDetails(object sender, EventArgs e)
+		{
+			MessagingCenter.Send(EventArgs.Empty, "OpenMenu");
+		}
+
+		protected override void OnAppearing()
+		{
+			base.OnAppearing();
+			// Note: Only on UPW and WPF because of a bug.
+			if (Device.RuntimePlatform == Device.UWP || Device.RuntimePlatform == Device.WPF)
+			{
+				NavigationPage.SetHasNavigationBar(this, true);
+				NavigationPage.SetHasNavigationBar(this, false);
+				MasterDetailPage mainPage = App.Current.MainPage as MasterDetailPage;
+				if (mainPage != null)
+				{
+					mainPage.MasterBehavior = MasterBehavior.Default;
+					mainPage.MasterBehavior = MasterBehavior.Popover;
+					mainPage.IsPresented = false;
+				}
 			}
 		}
 
@@ -57,17 +81,10 @@ namespace Shiftly_Xamarin.Views
 		//	ItemsListView.SelectedItem = null;
 		//}
 
-		//async void AddItem_Clicked(object sender, EventArgs e)
-		//{
-		//	await Navigation.PushModalAsync(new NavigationPage(new NewItemPage()));
-		//}
+		async void Button_Clicked(object sender, EventArgs e)
+		{
+			await Navigation.PushModalAsync(new NavigationPage(new AboutPage()));
+		}
 
-		//protected override void OnAppearing()
-		//{
-		//	base.OnAppearing();
-
-		//	if (viewModel.Items.Count == 0)
-		//		viewModel.LoadItemsCommand.Execute(null);
-		//}
-	}
+	}		
 }
